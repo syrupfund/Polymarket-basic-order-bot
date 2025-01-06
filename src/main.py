@@ -27,4 +27,4 @@ market = get_market('0xbb96f092cb5d54138c6af2ae824bb276c3e20969fb2acfced30ac7f88
 yes_token = next((item for item in market['tokens'] if item.get('outcome') == 'Yes'), None)
 
 # Step 5: fill order data and choose side you want to buy
-create_and_submit_order(yes_token['token_id'], BUY, 0.04, 26)
+create_and_submit_order(yes_token['token_id'], BUY, 0.044, 26)
