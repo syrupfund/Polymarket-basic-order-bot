@@ -25,6 +25,6 @@ Use this code at your own risk, this is just a showcase of possible functionalit
 
 ## Sidenotes
 
-- Yotube video with more explanation: 
+- Yotube video with more explanation - https://www.youtube.com/watch?v=ZbFTmDgSe_4
 - Polymarket CLOB API - https://docs.polymarket.com/
 - Polymarket CLOB Python client - https://github.com/Polymarket/py-clob-client
