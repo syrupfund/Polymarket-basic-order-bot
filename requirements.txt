@@ -1,3 +1,4 @@
 py-clob-client==0.18.0
 web3==7.6.1
 bip-utils==2.9.3
+python-dotenv==1.0.0

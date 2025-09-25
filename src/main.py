@@ -1,30 +1,47 @@
 import os
 from dotenv import load_dotenv
-
 from py_clob_client.order_builder.constants import BUY
-
-from helpers.generate_wallet import generate_new_wallet
-from helpers.set_allowances import set_allowances
-from api_keys.create_api_key import generate_api_keys
+from helpers.clob_client import create_clob_client
 from markets.get_markets import get_market
 from trades.trade_specific_market import create_and_submit_order
 
+def main():
+    load_dotenv()
+    
+    print("=== Simple Polymarket Bot ===")
+    
+    # Check if we have the required private key
+    if not os.getenv('PK'):
+        print("❌ Missing PK in .env file")
+        print("💡 Export your private key from Polymarket Settings and add to .env")
+        return
+    
+    print("✅ Private key found")
+    print("💡 Make sure you've done at least one manual trade on Polymarket first!")
+    
+    try:
+        # Step 1: Get market data
+        print("📊 Fetching market data...")
+        condition_id = '0x6a8c775d3a7ab901a5c4595dbc33478d654dc3b293be2b80fd64500cabbfcc37'
+        market = get_market(condition_id)
+        yes_token = next((item for item in market['tokens'] if item.get('outcome') == 'Yes'), None)
+        
+        print(f"📈 Market: {market.get('question', 'Unknown')}")
+        
+        # Step 2: Place trade
+        print("💰 Placing order...")
+        price = 0.044  # $0.044 per share
+        size = 26      # 26 shares  
+        side = BUY     # BUY or SELL
+        
+        print(f"   {side} {size} shares at ${price} each")
+        print(f"   Total: ${price * size:.2f}")
+        
+        create_and_submit_order(yes_token['token_id'], side, price, size)
+        print("✅ Order placed successfully!")
+        
+    except Exception as e:
+        print(f"❌ Error: {e}")
 
-load_dotenv()
-
-# Step 1: Generate a new wallet and save the PBK with PK to .env
-if os.getenv('PK') is None:
-    generate_new_wallet()
-
-# Step 2: Send some MATIC to the generated wallet to update allowances
-set_allowances()
-
-# Step 3: Generate API credentials so that we can communicate with Polymarket
-generate_api_keys()
-
-# Step 4: Find the condition ID for the market you want to trade and retrieve market info from CLOB
-market = get_market('0xbb96f092cb5d54138c6af2ae824bb276c3e20969fb2acfced30ac7f88f60862e')
-yes_token = next((item for item in market['tokens'] if item.get('outcome') == 'Yes'), None)
-
-# Step 5: Fill order data and choose the side you want to buy
-create_and_submit_order(yes_token['token_id'], BUY, 0.044, 26)
+if __name__ == "__main__":
+    main()

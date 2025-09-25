@@ -9,7 +9,7 @@ from web3.middleware import ExtraDataToPOAMiddleware
 def set_allowances():
   load_dotenv()
 
-  rpc_url = 'https://polygon.llamarpc.com' # Polygon rpc url
+  rpc_url = 'https://polygon-rpc.com' # Polygon rpc url
   priv_key = os.getenv('PK') # Polygon account private key (needs some MATIC)
   pub_key = os.getenv('PBK') # Polygon account public key corresponding to private key
 
