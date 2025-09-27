@@ -11,7 +11,7 @@ def create_clob_client() -> ClobClient:
     key = os.getenv('PK')  # Your exported private key from Polymarket
     
     # REPLACE THIS: Your Polymarket proxy address (shown below profile picture)
-    polymarket_proxy_address = "0x3573Aea9D0a65AbD15149A281e10143DBD665fAe"
+    polymarket_proxy_address = "YOUR_PROXY_ADDRESS_HERE"
     
     client = ClobClient(
         host=host, 
