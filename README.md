@@ -1,4 +1,4 @@
-# Polymarket Auto Trading Bot
+# Polymarket proxywallet Trading Bot
 
 A simple Python bot that automatically trades on Polymarket using the CLOB API. This bot is designed for users with **email/Magic wallet** accounts on Polymarket.
 
